@@ -1,11 +1,10 @@
-package com.github.cstroe.fs2.playground
+package com.github.cstroe.playground.fs2
 
 import java.nio.file.Paths
 
 import cats.effect.{Blocker, ExitCode, IO, IOApp}
 import cats.implicits._
-import fs2.{io, text, Stream}
-import java.nio.file.Paths
+import fs2.{Stream, io, text}
 
 object IOPlayground extends IOApp {
   val converter: Stream[IO, Unit] = Stream.resource(Blocker[IO]).flatMap { blocker =>
