@@ -9,16 +9,18 @@ repositories {
 
 tasks.withType(ScalaCompile) {
     // Enable extra scalac options.
-    // Example from: https://gradle.github.io/playframework/#configuring_compiler_options
+    // Found an example from: https://github.com/TinkoffCreditSystems/tofu/blob/afb59541647cf1f041004777f69da3021a6d7b44/build.sbt#L284-L319
     scalaCompileOptions.additionalParameters = [
             "-feature",
             "-Xfatal-warnings",
+            // cats requires higher kinded types
+            "-language:higherKinds"
     ]
 }
 
 ext {
     scalaVersion = "2.13"
-    http4sVersion = "0.21.0-RC3"
+    http4sVersion = "0.21.0"
     circeVersion = "0.12.3"
     logbackVersion = "1.2.3"
 }
@@ -40,6 +42,7 @@ dependencies {
     implementation "co.fs2:fs2-core_$scalaVersion:2.2.2"
     implementation "co.fs2:fs2-io_$scalaVersion:2.2.2"
 
+    // htt4s: https://http4s.org
     // From the http4s giter8 template:
     // https://github.com/http4s/http4s.g8/blob/0.20/src/main/g8/build.sbt#L13-L19
     implementation "org.http4s:http4s-blaze-server_$scalaVersion:$http4sVersion"
